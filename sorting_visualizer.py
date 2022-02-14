@@ -345,7 +345,7 @@ def MSD_radix_sort(a, base, left, right, digit_place=None, key_length=None):
         for i, el in enumerate(a.array[left:right]):
             digit = (el // (base**digit_place)) % base
             counter[digit] += 1
-            a.pointers["i"].set_pos_from_index(i, a)
+            a.pointers["i"].set_pos_from_index(left + i, a)
             yield None
             
         #cumulative counter
@@ -365,7 +365,7 @@ def MSD_radix_sort(a, base, left, right, digit_place=None, key_length=None):
         for i, j in enumerate(range(left, right)):
             a.array[j] = output[i]
             a.pointers["i"].set_pos_from_index(j, a)
-            a.pointers["pos"].set_pos_from_index(pos_array[i], a)
+            a.pointers["pos"].set_pos_from_index(left + pos_array[i], a)
             yield None
         
         digit_place -= 1
